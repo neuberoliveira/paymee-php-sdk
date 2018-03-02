@@ -17,19 +17,34 @@ use PayMee\Enums\PaymentMethod;
  */
 class PayMeeCheckout
 {
+    /**
+     * @var array
+     */
     private $config = [];
+
+    /**
+     * @var string
+     */
     private $x_api_key;
+
+    /**
+     * @var string
+     */
     private $x_api_token;
+
+    /**
+     * @var bool
+     */
     private $is_sandbox;
 
     /**
      * PayMeeCheckout constructor.
      *
-     * @param $x_api_key
-     * @param $x_api_token
-     * @param $isSandbox
+     * @param string $x_api_key
+     * @param string $x_api_token
+     * @param bool $isSandbox
      */
-    public function __construct($x_api_key, $x_api_token, $isSandbox)
+    public function __construct(string $x_api_key, string $x_api_token, bool $isSandbox)
     {
         $this->is_sandbox = $isSandbox;
         //Default currency
@@ -43,60 +58,60 @@ class PayMeeCheckout
     }
 
     /**
-     * @param $currency
-     * @return $this
+     * @param string $currency
+     * @return PayMeeCheckout
      */
-    public function withCurrency($currency)
+    public function withCurrency(string $currency) : PayMeeCheckout
     {
         $this->config["currency"] = $currency;
         return $this;
     }
 
     /**
-     * @param $amount
-     * @return $this
+     * @param float $amount
+     * @return PayMeeCheckout
      */
-    public function withAmount($amount)
+    public function withAmount(float $amount) : PayMeeCheckout
     {
         $this->config["amount"] = $amount;
         return $this;
     }
 
     /**
-     * @param $referenceCode
-     * @return $this
+     * @param string $referenceCode
+     * @return PayMeeCheckout
      */
-    public function withReferenceCode($referenceCode)
+    public function withReferenceCode(string $referenceCode)
     {
         $this->config["reference_code"] = $referenceCode;
         return $this;
     }
 
     /**
-     * @param $maxAge
-     * @return $this
+     * @param int $maxAge
+     * @return PayMeeCheckout
      */
-    public function withMaxAge($maxAge)
+    public function withMaxAge(int $maxAge) : PayMeeCheckout
     {
         $this->config["max_age"] = $maxAge;
         return $this;
     }
 
     /**
-     * @param $paymentMethod
-     * @return $this
+     * @param string $paymentMethod
+     * @return PayMeeCheckout
      */
-    public function withPaymentMethod($paymentMethod)
+    public function withPaymentMethod(string $paymentMethod) : PayMeeCheckout
     {
         $this->config["payment_method"] = $paymentMethod;
         return $this;
     }
 
     /**
-     * @param $callbackURL
-     * @return $this
+     * @param string|null $callbackURL
+     * @return PayMeeCheckout
      */
-    public function withCallbackURL($callbackURL)
+    public function withCallbackURL($callbackURL) : PayMeeCheckout
     {
         $this->config["callback_url"] = $callbackURL;
         return $this;
@@ -104,9 +119,9 @@ class PayMeeCheckout
 
     /**
      * @param Shopper $shopper
-     * @return $this
+     * @return PayMeeCheckout
      */
-    public function withShopper(Shopper $shopper)
+    public function withShopper(Shopper $shopper) : PayMeeCheckout
     {
         $this->config["shopper"] = $shopper;
         return $this;
@@ -132,7 +147,7 @@ class PayMeeCheckout
         } elseif (!isset($this->config["reference_code"])) {
             throw new \Exception('reference_code cannot be null or empty.');
         } elseif (!isset($this->config["shopper"]) || (isset($this->config["shopper"]) && !is_a($this->config["shopper"],
-                    'PayMee\Shopper'))) {
+                    'PayMee\Model\Shopper'))) {
             throw new \Exception('shopper cannot be null or empty.');
         } elseif (isset($this->config["shopper"]) && is_a($this->config["shopper"], 'Shopper')) {
             $shopper = $this->config["shopper"];
@@ -152,7 +167,7 @@ class PayMeeCheckout
                 throw new \Exception('payment_method is mandatory in transparent mode');
             } elseif (isset($this->config["payment_method"])
                 && !PaymentMethod::isValidValue($this->config["payment_method"])) {
-                throw new \Exception($this - config["payment_method"] . ' is not valid for payment_method');
+                throw new \Exception($this->config["payment_method"] . ' is not valid for payment_method');
             } elseif (($this->config["payment_method"] === PaymentMethod::BB_TRANSFER || $this->config["payment_method"] === PaymentMethod::ITAU_TRANSFER_GENERIC || PaymentMethod::ITAU_TRANSFER_PJ)
                 && ($this->config["shopper"]->getAgency() === null || $this->config["shopper"]->getAccount() === null)) {
                 throw new \Exception("chosen payment_method '" . $this->config["payment_method"] . "' needs shopper.agency and shopper.account");
@@ -166,12 +181,12 @@ class PayMeeCheckout
     }
 
     /**
-     * @param $checkoutType
-     * @param $toJSON
+     * @param string $checkoutType
+     * @param bool $toJSON
      * @return mixed|string
      * @throws \Exception
      */
-    private function generateTransaction($checkoutType, $toJSON)
+    private function generateTransaction(string $checkoutType, bool $toJSON)
     {
         $request = new \stdClass();
         $request->currency = $this->config["currency"];

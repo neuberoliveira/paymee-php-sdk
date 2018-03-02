@@ -30,12 +30,12 @@ abstract class BasicEnum
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @param bool $strict
      * @return bool
      * @throws \ReflectionException
      */
-    public static function isValidName($name, $strict = false)
+    public static function isValidName(string $name, bool $strict = false) : bool
     {
         $constants = self::getConstants();
 
@@ -49,12 +49,12 @@ abstract class BasicEnum
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @param bool $strict
      * @return bool
      * @throws \ReflectionException
      */
-    public static function isValidValue($value, $strict = true)
+    public static function isValidValue(string $value, bool $strict = true) : bool
     {
         $values = array_values(self::getConstants());
 

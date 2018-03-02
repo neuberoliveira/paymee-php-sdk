@@ -7,6 +7,8 @@
  * 0.0.1-snapshot
  */
 
+require 'vendor/autoload.php';
+
 use PayMee\Enums\CheckoutType;
 use PayMee\Helpers\PayMeeCheckout;
 
