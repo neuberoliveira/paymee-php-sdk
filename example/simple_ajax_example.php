@@ -6,6 +6,12 @@
  * https://documenter.getpostman.com/view/3199663/api-paymee-10/7TDmbJx
  * 0.0.1-snapshot
  */
+
+require 'vendor/autoload.php';
+
+use PayMee\Enums\CheckoutType;
+use PayMee\Helpers\PayMeeCheckout;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -15,10 +21,6 @@ define("X_API_TOKEN", "cd84e7e1-2b10-3232-a2f1-b13ee3068a4c");
 define("IS_SANDBOX", true);
 
 header("Content-Type: application/json");
-require("classes/helpers/PayMeeCheckout.class.php");
-require("classes/models/Shopper.class.php");
-
-use PayMee;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("HTTP/1.0 405 please post...");
@@ -35,7 +37,7 @@ if($data->shopper === null) {
 }
 
 //Define os dados do comprador
-$shopper = new PayMee\Shopper();
+$shopper = new PayMee\Model\Shopper();
 $shopper
         //Email do comprador (preenchimento obrigatório)
         ->withEmail($data->shopper->email)
@@ -52,7 +54,7 @@ $shopper
 
 //Cria uma instancia do PayMeeCheckout para criar a cobrança
 //x-api-key, x-api-token, is_sandbox
-$paymeeCheckout = new PayMee\PayMeeCheckout(X_API_KEY, X_API_TOKEN, IS_SANDBOX);
+$paymeeCheckout = new PayMeeCheckout(X_API_KEY, X_API_TOKEN, IS_SANDBOX);
 try {
     $response = $paymeeCheckout
                 //Moeda da transação
@@ -82,7 +84,7 @@ try {
                 //Cria a solicitação da transação
                 //true para transparente
                 //false para redirecionamento
-                ->create(PayMee\CheckoutType::SEMI_TRANSPARENT, true);
+                ->create(CheckoutType::SEMI_TRANSPARENT, true);
                 echo $response;
 } catch(Exception $e) {
     echo "oops... " . $e->getMessage();

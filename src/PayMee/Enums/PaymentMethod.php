@@ -1,6 +1,12 @@
 <?php
-namespace PayMee;
-include_once("BasicEnum.class.php");
+
+namespace PayMee\Enums;
+
+/**
+ * Class PaymentMethod
+ *
+ * @package PayMee\Enums
+ */
 abstract class PaymentMethod extends BasicEnum
 {
     const BB_TRANSFER = "BB_TRANSFER";
@@ -12,4 +18,3 @@ abstract class PaymentMethod extends BasicEnum
     const SANTANDER_TRANSFER = "SANTANDER_TRANSFER";
     const SANTANDER_DI = "SANTANDER_DI";
 }
-?>
