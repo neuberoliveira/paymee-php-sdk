@@ -18,10 +18,10 @@ use PayMee\Model\Shopper;
 $shopper = new Shopper();
 $shopper
         ->withEmail('foo@bar.com')
-        ->withMobile('(31)99938-0586')
+        ->withPhone('(31)99938-0586')
         ->withFullName('Foo bar')
         ->withCpf('015.680.186-81')
-        ->withAgency('XXXX-X')
+        ->withBranch('XXXX-X')
         ->withAccount('XXXXXXX-X');
 ```
 #### Instantiate the PayMeeCheckout class with config values
