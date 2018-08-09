@@ -21,7 +21,7 @@ $shopper
         ->withPhone('(31)99938-0586')
         ->withFullName('Foo bar')
         ->withCpf('015.680.186-81')
-        ->withBranch('XXXX-X')
+        ->withBranch('XXXX')
         ->withAccount('XXXXXXX-X');
 ```
 #### Instantiate the PayMeeCheckout class with config values
