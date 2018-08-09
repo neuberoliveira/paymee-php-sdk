@@ -108,7 +108,7 @@ class Shopper
      *
      * @return string
      */
-    public function getAgency() : string
+    public function getBranch() : string
     {
         return $this->agency;
     }
@@ -119,9 +119,9 @@ class Shopper
      * @param string $agency
      * @return Shopper
      */
-    public function withAgency(string $agency) : Shopper
+    public function withBranch(string $branch) : Shopper
     {
-        $this->agency = $agency;
+        $this->agency = $branch;
         return $this;
     }
 
@@ -171,7 +171,7 @@ class Shopper
      * Get the value of mobile
      * @return string
      */
-    public function getMobile() : string
+    public function getPhone() : string
     {
         return $this->mobile;
     }
@@ -182,9 +182,9 @@ class Shopper
      * @param $mobile
      * @return Shopper
      */
-    public function withMobile(string $mobile) : Shopper
+    public function withPhone(string $phone) : Shopper
     {
-        $this->mobile = $mobile;
+        $this->mobile = $phone;
         return $this;
     }
 
