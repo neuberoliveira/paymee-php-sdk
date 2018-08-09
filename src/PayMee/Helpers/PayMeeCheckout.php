@@ -153,8 +153,8 @@ class PayMeeCheckout
             $shopper = $this->config["shopper"];
             if (!filter_var($shopper->getEmail(), FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception('shopper.email isnt a valid email');
-            } elseif ($shopper->getMobile() === null) {
-                throw new \Exception('shopper.mobile cannot be null or empty.');
+            } elseif ($shopper->getPhone() === null) {
+                throw new \Exception('shopper.phone cannot be null or empty.');
             } elseif ($shopper->getFullName() === null) {
                 throw new \Exception('shopper.fullName cannot be null or empty.');
             } elseif ($shopper->getCpf() === null) {
@@ -169,8 +169,8 @@ class PayMeeCheckout
                 && !PaymentMethod::isValidValue($this->config["payment_method"])) {
                 throw new \Exception($this->config["payment_method"] . ' is not valid for payment_method');
             } elseif (($this->config["payment_method"] === PaymentMethod::BB_TRANSFER || $this->config["payment_method"] === PaymentMethod::ITAU_TRANSFER_GENERIC || PaymentMethod::ITAU_TRANSFER_PJ)
-                && ($this->config["shopper"]->getAgency() === null || $this->config["shopper"]->getAccount() === null)) {
-                throw new \Exception("chosen payment_method '" . $this->config["payment_method"] . "' needs shopper.agency and shopper.account");
+                && ($this->config["shopper"]->getBranch() === null || $this->config["shopper"]->getAccount() === null)) {
+                throw new \Exception("chosen payment_method '" . $this->config["payment_method"] . "' needs shopper.branch and shopper.account");
             }
 
             return $this->generateTransaction($checkoutType, $toJSON);
