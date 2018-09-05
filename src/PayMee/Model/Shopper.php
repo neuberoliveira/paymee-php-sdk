@@ -64,7 +64,7 @@ class Shopper
      *
      * @return string
      */
-    public function getId() : string
+    public function getId()
     {
         return $this->id;
     }
@@ -75,7 +75,7 @@ class Shopper
      * @param string $id
      * @return Shopper
      */
-    public function withId(string $id) : Shopper
+    public function withId(string $id)
     {
         $this->id = $id;
         return $this;
@@ -87,7 +87,7 @@ class Shopper
      * @param string $cpf
      * @return $this
      */
-    public function withCpf(string $cpf) : Shopper
+    public function withCpf(string $cpf)
     {
         $this->cpf = $cpf;
         return $this;
@@ -98,7 +98,7 @@ class Shopper
      *
      * @return string
      */
-    public function getCpf() : string
+    public function getCpf()
     {
         return $this->cpf;
     }
@@ -108,7 +108,7 @@ class Shopper
      *
      * @return string
      */
-    public function getBranch() : string
+    public function getBranch()
     {
         return $this->agency;
     }
@@ -119,7 +119,7 @@ class Shopper
      * @param string $agency
      * @return Shopper
      */
-    public function withBranch(string $branch) : Shopper
+    public function withBranch(string $branch)
     {
         $this->agency = $branch;
         return $this;
@@ -130,7 +130,7 @@ class Shopper
      *
      * @return string
      */
-    public function getAccount() : string
+    public function getAccount()
     {
         return $this->account;
     }
@@ -141,7 +141,7 @@ class Shopper
      * @param string $account
      * @return Shopper
      */
-    public function withAccount(string $account) : Shopper
+    public function withAccount(string $account)
     {
         $this->account = $account;
         return $this;
@@ -150,7 +150,7 @@ class Shopper
     /**
      * Get the value of email
      */
-    public function getEmail() : string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -161,7 +161,7 @@ class Shopper
      * @param $email
      * @return Shopper
      */
-    public function withEmail(string $email) : Shopper
+    public function withEmail(string $email)
     {
         $this->email = $email;
         return $this;
@@ -171,7 +171,7 @@ class Shopper
      * Get the value of mobile
      * @return string
      */
-    public function getPhone() : string
+    public function getPhone()
     {
         return $this->mobile;
     }
@@ -182,7 +182,7 @@ class Shopper
      * @param $mobile
      * @return Shopper
      */
-    public function withPhone(string $phone) : Shopper
+    public function withPhone(string $phone)
     {
         $this->mobile = $phone;
         return $this;
@@ -193,7 +193,7 @@ class Shopper
      *
      * @return string
      */
-    public function getIp() : string
+    public function getIp()
     {
         return $this->ip;
     }
@@ -204,7 +204,7 @@ class Shopper
      * @param string $ip
      * @return Shopper
      */
-    public function withIp(string $ip) : Shopper
+    public function withIp(string $ip)
     {
         $this->ip = $ip;
         return $this;
@@ -215,7 +215,7 @@ class Shopper
      *
      * @return string
      */
-    public function getFullName() : string
+    public function getFullName()
     {
         return $this->fullName;
     }
@@ -226,7 +226,7 @@ class Shopper
      * @param string $fullName
      * @return Shopper
      */
-    public function withFullName(string $fullName) : Shopper
+    public function withFullName(string $fullName)
     {
         $this->fullName = $fullName;
         return $this;
@@ -237,7 +237,7 @@ class Shopper
      *
      * @return string
      */
-    public function getFirstName() : string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -248,7 +248,7 @@ class Shopper
      * @param string $firstName
      * @return Shopper
      */
-    public function withFirstName(string $firstName) : Shopper
+    public function withFirstName(string $firstName)
     {
         $this->firstName = $firstName;
         return $this;
@@ -259,7 +259,7 @@ class Shopper
      *
      * @return string
      */
-    public function getLastName() : string
+    public function getLastName()
     {
         return $this->lastName;
     }
@@ -268,7 +268,7 @@ class Shopper
      * @param string $lastName
      * @return Shopper
      */
-    public function withLastName(string $lastName) : Shopper
+    public function withLastName(string $lastName)
     {
         $this->lastName = $lastName;
         return $this;

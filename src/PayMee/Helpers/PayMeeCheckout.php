@@ -61,7 +61,7 @@ class PayMeeCheckout
      * @param string $currency
      * @return PayMeeCheckout
      */
-    public function withCurrency(string $currency) : PayMeeCheckout
+    public function withCurrency(string $currency)
     {
         $this->config["currency"] = $currency;
         return $this;
@@ -71,7 +71,7 @@ class PayMeeCheckout
      * @param float $amount
      * @return PayMeeCheckout
      */
-    public function withAmount(float $amount) : PayMeeCheckout
+    public function withAmount(float $amount)
     {
         $this->config["amount"] = $amount;
         return $this;
@@ -91,7 +91,7 @@ class PayMeeCheckout
      * @param int $maxAge
      * @return PayMeeCheckout
      */
-    public function withMaxAge(int $maxAge) : PayMeeCheckout
+    public function withMaxAge(int $maxAge)
     {
         $this->config["max_age"] = $maxAge;
         return $this;
@@ -101,7 +101,7 @@ class PayMeeCheckout
      * @param string $paymentMethod
      * @return PayMeeCheckout
      */
-    public function withPaymentMethod(string $paymentMethod) : PayMeeCheckout
+    public function withPaymentMethod(string $paymentMethod)
     {
         $this->config["payment_method"] = $paymentMethod;
         return $this;
@@ -111,7 +111,7 @@ class PayMeeCheckout
      * @param string|null $callbackURL
      * @return PayMeeCheckout
      */
-    public function withCallbackURL($callbackURL) : PayMeeCheckout
+    public function withCallbackURL($callbackURL)
     {
         $this->config["callback_url"] = $callbackURL;
         return $this;
@@ -121,7 +121,7 @@ class PayMeeCheckout
      * @param Shopper $shopper
      * @return PayMeeCheckout
      */
-    public function withShopper(Shopper $shopper) : PayMeeCheckout
+    public function withShopper(Shopper $shopper)
     {
         $this->config["shopper"] = $shopper;
         return $this;
