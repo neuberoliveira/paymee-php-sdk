@@ -44,7 +44,7 @@ class PayMeeCheckout
      * @param string $x_api_token
      * @param bool $isSandbox
      */
-    public function __construct(string $x_api_key, string $x_api_token, bool $isSandbox)
+    public function __construct($x_api_key, $x_api_token, $isSandbox)
     {
         $this->is_sandbox = $isSandbox;
         //Default currency
@@ -61,7 +61,7 @@ class PayMeeCheckout
      * @param string $currency
      * @return PayMeeCheckout
      */
-    public function withCurrency(string $currency)
+    public function withCurrency($currency)
     {
         $this->config["currency"] = $currency;
         return $this;
@@ -71,7 +71,7 @@ class PayMeeCheckout
      * @param float $amount
      * @return PayMeeCheckout
      */
-    public function withAmount(float $amount)
+    public function withAmount($amount)
     {
         $this->config["amount"] = $amount;
         return $this;
@@ -81,7 +81,7 @@ class PayMeeCheckout
      * @param string $referenceCode
      * @return PayMeeCheckout
      */
-    public function withReferenceCode(string $referenceCode)
+    public function withReferenceCode($referenceCode)
     {
         $this->config["reference_code"] = $referenceCode;
         return $this;
@@ -91,7 +91,7 @@ class PayMeeCheckout
      * @param int $maxAge
      * @return PayMeeCheckout
      */
-    public function withMaxAge(int $maxAge)
+    public function withMaxAge($maxAge)
     {
         $this->config["max_age"] = $maxAge;
         return $this;
@@ -101,7 +101,7 @@ class PayMeeCheckout
      * @param string $paymentMethod
      * @return PayMeeCheckout
      */
-    public function withPaymentMethod(string $paymentMethod)
+    public function withPaymentMethod($paymentMethod)
     {
         $this->config["payment_method"] = $paymentMethod;
         return $this;
@@ -186,7 +186,7 @@ class PayMeeCheckout
      * @return mixed|string
      * @throws \Exception
      */
-    private function generateTransaction(string $checkoutType, bool $toJSON)
+    private function generateTransaction($checkoutType, $toJSON)
     {
         $request = new \stdClass();
         $request->currency = $this->config["currency"];

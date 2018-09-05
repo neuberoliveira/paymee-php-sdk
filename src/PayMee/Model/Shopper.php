@@ -75,7 +75,7 @@ class Shopper
      * @param string $id
      * @return Shopper
      */
-    public function withId(string $id)
+    public function withId($id)
     {
         $this->id = $id;
         return $this;
@@ -87,7 +87,7 @@ class Shopper
      * @param string $cpf
      * @return $this
      */
-    public function withCpf(string $cpf)
+    public function withCpf($cpf)
     {
         $this->cpf = $cpf;
         return $this;
@@ -119,7 +119,7 @@ class Shopper
      * @param string $agency
      * @return Shopper
      */
-    public function withBranch(string $branch)
+    public function withBranch($branch)
     {
         $this->agency = $branch;
         return $this;
@@ -141,7 +141,7 @@ class Shopper
      * @param string $account
      * @return Shopper
      */
-    public function withAccount(string $account)
+    public function withAccount($account)
     {
         $this->account = $account;
         return $this;
@@ -161,7 +161,7 @@ class Shopper
      * @param $email
      * @return Shopper
      */
-    public function withEmail(string $email)
+    public function withEmail($email)
     {
         $this->email = $email;
         return $this;
@@ -182,7 +182,7 @@ class Shopper
      * @param $mobile
      * @return Shopper
      */
-    public function withPhone(string $phone)
+    public function withPhone($phone)
     {
         $this->mobile = $phone;
         return $this;
@@ -204,7 +204,7 @@ class Shopper
      * @param string $ip
      * @return Shopper
      */
-    public function withIp(string $ip)
+    public function withIp($ip)
     {
         $this->ip = $ip;
         return $this;
@@ -226,7 +226,7 @@ class Shopper
      * @param string $fullName
      * @return Shopper
      */
-    public function withFullName(string $fullName)
+    public function withFullName($fullName)
     {
         $this->fullName = $fullName;
         return $this;
@@ -248,7 +248,7 @@ class Shopper
      * @param string $firstName
      * @return Shopper
      */
-    public function withFirstName(string $firstName)
+    public function withFirstName($firstName)
     {
         $this->firstName = $firstName;
         return $this;
@@ -268,7 +268,7 @@ class Shopper
      * @param string $lastName
      * @return Shopper
      */
-    public function withLastName(string $lastName)
+    public function withLastName($lastName)
     {
         $this->lastName = $lastName;
         return $this;
