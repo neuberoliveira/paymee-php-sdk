@@ -134,7 +134,7 @@ class PayMeeCheckout
      * @throws \Exception
      * @throws \ReflectionException
      */
-    public function create($checkoutType, $toJSON)
+    public function create($checkoutType, $toJSON=false)
     {
         if (!isset($checkoutType)) {
             $checkoutType = CheckoutType::SEMI_TRANSPARENT;
@@ -227,9 +227,11 @@ class PayMeeCheckout
         $response = json_decode($response);
         if ($toJSON === true) {
             return json_encode($response, JSON_UNESCAPED_UNICODE);
-        }
+        }else{
+			$response = Transaction::fromJson($response);
+		}
 
         return $response;
-    }
+	}
 }
 

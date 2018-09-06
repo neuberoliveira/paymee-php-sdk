@@ -58,8 +58,22 @@ class Shopper
      * @var string
      */
     public $ip;
-
-    /**
+	
+	
+	public static function fromJson($json){
+		$shop = new Shopper();
+		
+		$shop->id = $json->id;
+		$shop->name = $json->name;
+		$shop->email = $json->email;
+		$shop->document = Document::fromJson($json->document);
+		$shop->bankDetails = BankDetails::fromJson($json->bankDetails);
+		$shop->phone = Phone::fromJson($json->phone);
+		
+		return $shop;
+	}
+	
+	/**
      * Get the value of id
      *
      * @return string
