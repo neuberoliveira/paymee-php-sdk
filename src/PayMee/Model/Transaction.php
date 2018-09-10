@@ -1,6 +1,8 @@
 <?php
 
 namespace PayMee\Model;
+use PayMee\Model\Shopper;
+use PayMee\Model\Instructions;
 
 /**
  * Class Transaction

@@ -9,6 +9,9 @@ namespace PayMee\Model;
  */
 class Document
 {
+	const TYPE_CPF = 'CPF';
+	const TYPE_CNPJ = 'CNPJ';
+	const TYPE_OTHER = 'OTHER';
 	/**
 	 * @var string
 	 */

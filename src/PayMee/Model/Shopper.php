@@ -17,42 +17,27 @@ class Shopper
     /**
      * @var string
      */
-    public $fullName;
-
-    /**
-     * @var string
-     */
-    public $firstName;
-
-    /**
-     * @var string
-     */
-    public $lastName;
-
-    /**
-     * @var string
-     */
-    public $cpf;
-
-    /**
-     * @var string
-     */
-    public $agency;
-
-    /**
-     * @var string
-     */
-    public $account;
-
+	public $name;
+	
     /**
      * @var string
      */
     public $email;
 
     /**
-     * @var string
+     * @var Document
      */
-    public $mobile;
+    public $document;
+
+	/**
+     * @var Phone
+     */
+    public $phone;
+
+	/**
+     * @var BankDetails
+     */
+    public $bankDetails;
 
     /**
      * @var string
@@ -63,7 +48,9 @@ class Shopper
 	public static function fromJson($json){
 		$shop = new Shopper();
 		
-		$shop->id = $json->id;
+		if(isset($json->id)){
+			$shop->id = $json->id;
+		}
 		$shop->name = $json->name;
 		$shop->email = $json->email;
 		$shop->document = Document::fromJson($json->document);
@@ -96,72 +83,6 @@ class Shopper
     }
 
     /**
-     * Set the value of cpf
-     *
-     * @param string $cpf
-     * @return $this
-     */
-    public function withCpf($cpf)
-    {
-        $this->cpf = $cpf;
-        return $this;
-    }
-
-    /**
-     * Get the value of cpf
-     *
-     * @return string
-     */
-    public function getCpf()
-    {
-        return $this->cpf;
-    }
-
-    /**
-     * Get the value of agency
-     *
-     * @return string
-     */
-    public function getBranch()
-    {
-        return $this->agency;
-    }
-
-    /**
-     * Set the value of agency
-     *
-     * @param string $agency
-     * @return Shopper
-     */
-    public function withBranch($branch)
-    {
-        $this->agency = $branch;
-        return $this;
-    }
-
-    /**
-     * Get the value of account
-     *
-     * @return string
-     */
-    public function getAccount()
-    {
-        return $this->account;
-    }
-
-    /**
-     * Set the value of account
-     *
-     * @param string $account
-     * @return Shopper
-     */
-    public function withAccount($account)
-    {
-        $this->account = $account;
-        return $this;
-    }
-
-    /**
      * Get the value of email
      */
     public function getEmail()
@@ -180,25 +101,89 @@ class Shopper
         $this->email = $email;
         return $this;
     }
-
-    /**
-     * Get the value of mobile
+	
+	/**
+     * Get the value of name
+     *
      * @return string
      */
-    public function getPhone()
+    public function getName()
     {
-        return $this->mobile;
+        return $this->name;
     }
 
     /**
-     * Set the value of mobile
+     * Set the value of name
      *
-     * @param $mobile
+     * @param string $name
      * @return Shopper
      */
-    public function withPhone($phone)
+    public function withName($name)
     {
-        $this->mobile = $phone;
+        $this->name = $name;
+        return $this;
+	}
+	
+    /**
+     * Get the value of document
+     * @return Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * Set the value of document
+     *
+     * @param $document
+     * @return Shopper
+     */
+    public function withDocument(Document $document)
+    {
+        $this->document = $document;
+        return $this;
+	}
+	
+    /**
+     * Get the value of phone
+     * @return Phone
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set the value of phone
+     *
+     * @param $phone
+     * @return Shopper
+     */
+    public function withPhone(Phone $phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+	
+    /**
+     * Get the value of bankDetails
+     * @return BankDetails
+     */
+    public function getbankDetails()
+    {
+        return $this->bankDetails;
+    }
+
+    /**
+     * Set the value of bankDetails
+     *
+     * @param $bankDetails
+     * @return Shopper
+     */
+    public function withBankDetails(BankDetails $bankDetails)
+    {
+        $this->bankDetails = $bankDetails;
         return $this;
     }
 
@@ -221,70 +206,6 @@ class Shopper
     public function withIp($ip)
     {
         $this->ip = $ip;
-        return $this;
-    }
-
-    /**
-     * Get the value of fullName
-     *
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->fullName;
-    }
-
-    /**
-     * Set the value of fullName
-     *
-     * @param string $fullName
-     * @return Shopper
-     */
-    public function withFullName($fullName)
-    {
-        $this->fullName = $fullName;
-        return $this;
-    }
-
-    /**
-     * Get the value of firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set the value of firstName
-     *
-     * @param string $firstName
-     * @return Shopper
-     */
-    public function withFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-        return $this;
-    }
-
-    /**
-     * Get the value of lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     * @return Shopper
-     */
-    public function withLastName($lastName)
-    {
-        $this->lastName = $lastName;
         return $this;
     }
 } 

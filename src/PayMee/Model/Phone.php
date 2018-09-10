@@ -9,15 +9,20 @@ namespace PayMee\Model;
  */
 class Phone
 {
+	const TYPE_MOBILE = 'MOBILE';
+	const TYPE_HOME = 'HOME';
+	const TYPE_WORK = 'WORK';
+	const TYPE_OTHER = 'OTHER';
+	
 	/**
 	* @var string
 	*/
-   public $branch;
+   public $type;
    
    /**
 	* @var string
 	*/
-   public $account;
+   public $number;
    
    
    public static function fromJson($json){
@@ -29,20 +34,20 @@ class Phone
 	}
 
    /** 
-	* Get the value of branch
+	* Get the value of type
 	* 
 	* @return string
 	*/
-   public function getBranch(){
-	   return $this->branch;
+   public function getType(){
+	   return $this->type;
    }
 
    /** 
-	* Get the value of account
+	* Get the value of number
 	* 
 	* @return string 
 	*/
-   public function getAccount(){
-	   return $this->account;
+   public function getNumber(){
+	   return $this->number;
    }
 } 
