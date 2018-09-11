@@ -1,13 +1,14 @@
 <?php
 
 namespace PayMee\Model;
+use \Exception;
 
 /**
  * Class Shopper
  *
  * @package PayMee\Model
  */
-class Shopper
+class Shopper extends AbstractModel
 {
     /**
      * @var string
@@ -44,7 +45,9 @@ class Shopper
      */
     public $ip;
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public static function fromJson($json){
 		$shop = new Shopper();
 		
@@ -58,6 +61,35 @@ class Shopper
 		$shop->phone = Phone::fromJson($json->phone);
 		
 		return $shop;
+	}
+	
+	public function validate()
+	{
+		if (!filter_var($this->getEmail(), FILTER_VALIDATE_EMAIL)) {
+			throw new \Exception('shopper.email isnt a valid email');
+		}else if($this->isInstanceOf($this->bankDetails, 'PayMee\Model\BankDetails')){
+			throw new \Exception('shopper.bankDetails is required');
+		}else if($this->isInstanceOf($this->phone, 'PayMee\Model\Phone')){
+			throw new \Exception('shopper.phone is required');
+		}else if($this->isInstanceOf($this->document, 'PayMee\Model\Document')){
+			throw new \Exception('shopper.document is required');
+		}
+		
+		$this->bankDetails->validate();
+		$this->document->validate();
+		$this->phone->validate();
+		
+	}
+	
+	protected function validatePhoneObject()
+	{
+		if(!is_a($this->phone, 'PayMee\Model\Phone')){
+			throw new Exception();
+		}
+	}
+	
+	protected function isInstanceOf($field, $requiredType){
+		return is_a($field, $requiredType);
 	}
 	
 	/**

@@ -1,13 +1,14 @@
 <?php
 
 namespace PayMee\Model;
+use \Exception;
 
 /**
  * Class Document
  *
  * @package PayMee\Model
  */
-class Document
+class Document extends AbstractModel
 {
 	const TYPE_CPF = 'CPF';
 	const TYPE_CNPJ = 'CNPJ';
@@ -22,7 +23,9 @@ class Document
 	 */
 	public $number;
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public static function fromJson($json){
 		$doc = new Document();
 		$doc->type = $json->type;
@@ -31,12 +34,23 @@ class Document
 		return $doc;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function validate()
+	{
+		if ($this->getNumber() === null) {
+			throw new \Exception('shopper.document.number cannot be null or empty.');
+		}
+	}
+	
 	/** 
 	 * Get the value of type
 	 * 
 	 * @return string
 	 */
-	public function getType(){
+	public function getType()
+	{
 		return $this->type;
 	}
 
@@ -45,7 +59,8 @@ class Document
 	 * 
 	 * @return string 
 	 */
-	public function getNumber(){
+	public function getNumber()
+	{
 		return $this->number;
 	}
 }

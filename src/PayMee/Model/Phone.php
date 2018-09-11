@@ -1,13 +1,14 @@
 <?php
 
 namespace PayMee\Model;
+use \Exception;
 
 /**
  * Class Phone
  *
  * @package PayMee\Model
  */
-class Phone
+class Phone extends AbstractModel
 {
 	const TYPE_MOBILE = 'MOBILE';
 	const TYPE_HOME = 'HOME';
@@ -24,13 +25,26 @@ class Phone
 	*/
    public $number;
    
-   
-   public static function fromJson($json){
+	/**
+	 * {@inheritDoc}
+	 */
+   public static function fromJson($json)
+   {
 		$phone = new Phone();
 		$phone->type = $json->type;
 		$phone->number = $json->number;
 		
 		return $phone;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function validate()
+	{
+		if ($this->getNumber() === null) {
+			throw new \Exception('shopper.phone.number cannot be null or empty.');
+		}
 	}
 
    /** 
@@ -38,7 +52,8 @@ class Phone
 	* 
 	* @return string
 	*/
-   public function getType(){
+   public function getType()
+   {
 	   return $this->type;
    }
 
@@ -47,7 +62,8 @@ class Phone
 	* 
 	* @return string 
 	*/
-   public function getNumber(){
+   public function getNumber()
+   {
 	   return $this->number;
    }
 } 

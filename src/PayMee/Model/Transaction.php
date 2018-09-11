@@ -3,13 +3,14 @@
 namespace PayMee\Model;
 use PayMee\Model\Shopper;
 use PayMee\Model\Instructions;
+use \Exception;
 
 /**
  * Class Transaction
  *
  * @package PayMee\Model
  */
-class Transaction
+class Transaction extends AbstractModel
 {
     /**
      * @var string
@@ -42,6 +43,11 @@ class Transaction
     public $uuid;
 
     /**
+     * @var string
+     */
+    public $gatewayURL;
+
+    /**
      * @var Shopper
      */
     public $shopper;
@@ -51,8 +57,11 @@ class Transaction
      */
     public $instructions;
 	
-	
-	public static function fromJson($json){
+	/**
+	 * {@inheritDoc}
+	 */
+	public static function fromJson($json)
+	{
 		$trans = new Transaction();
 		$res = $json->response;
 		
@@ -62,19 +71,41 @@ class Transaction
         $trans->amount = $res->amount;
         $trans->saleCode = $res->saleCode;
 		$trans->uuid = $res->uuid;
+		
+		if(isset($res->gatewayURL)){
+			$trans->gatewayURL = $res->gatewayURL;
+		}
 		$trans->shopper = Shopper::fromJson($res->shopper);
-		$trans->instructions = Instructions::fromJson($res->instructions);
+		
+		if(isset($res->instructions)){
+			$trans->instructions = Instructions::fromJson($res->instructions);
+		}
 		
 		return $trans;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function validate()
+	{
+	}
+	
+	public function hasInstructions(){
+		return !empty($this->instructions) && is_a($this->instructions, 'PayMee\Model\Instructions');
+	}
+	
+	public function hasGatewayURL(){
+		return !empty($this->gatewayURL);
+	}
 	
 	/** 
 	 * Set the value of status
 	 *
 	 * @return string 
 	 */
-	public function getStatus(){
+	public function getStatus()
+	{
 		return $this->status;
 	}
 
@@ -83,7 +114,8 @@ class Transaction
 	 *
 	 * @return string 
 	 */
-	public function getMessage(){
+	public function getMessage()
+	{
 		return $this->message;
 	}
 	
@@ -125,6 +157,16 @@ class Transaction
     public function getUUID()
     {
         return $this->uuid;
+    }
+	
+    /**
+     * Get the value of gatewayURL
+     *
+     * @return string
+     */
+    public function getGatewayURL()
+    {
+        return $this->gatewayURL;
     }
 	
  	/**
