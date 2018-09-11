@@ -210,10 +210,10 @@ class PayMeeCheckout
         if ($toJSON === true) {
             return json_encode($response, JSON_UNESCAPED_UNICODE);
         }else{
-			print_r($response);
+			// print_r($response);
 			$response = Transaction::fromJson($response);
-			print_r($response);
-			exit('response');
+			// print_r($response);
+			// exit('response');
 		}
 
         return $response;
