@@ -3,6 +3,7 @@
 namespace PayMee\Model;
 use PayMee\Model\Shopper;
 use PayMee\Model\Instructions;
+use PayMee\Model\Error;
 use \Exception;
 
 /**
@@ -56,6 +57,11 @@ class Transaction extends AbstractModel
      * @var Instructions
      */
     public $instructions;
+
+    /**
+     * @var Error
+     */
+    public $error;
 	
 	/**
 	 * {@inheritDoc}
@@ -67,19 +73,25 @@ class Transaction extends AbstractModel
 		
 		$trans->status = $json->status;
 		$trans->message = $json->message;
-		$trans->referenceCode = $res->referenceCode;
-        $trans->amount = $res->amount;
-        $trans->saleCode = $res->saleCode;
-		$trans->uuid = $res->uuid;
 		
-		if(isset($res->gatewayURL)){
-			$trans->gatewayURL = $res->gatewayURL;
+		if($json->status >= 0){
+			$trans->referenceCode = $res->referenceCode;
+			$trans->amount = $res->amount;
+			$trans->saleCode = $res->saleCode;
+			$trans->uuid = $res->uuid;
+			
+			if(isset($res->gatewayURL)){
+				$trans->gatewayURL = $res->gatewayURL;
+			}
+			$trans->shopper = Shopper::fromJson($res->shopper);
+			
+			if(isset($res->instructions)){
+				$trans->instructions = Instructions::fromJson($res->instructions);
+			}
+		}else{
+			$trans->error = Error::fromJson($json);
 		}
-		$trans->shopper = Shopper::fromJson($res->shopper);
 		
-		if(isset($res->instructions)){
-			$trans->instructions = Instructions::fromJson($res->instructions);
-		}
 		
 		return $trans;
 	}
@@ -97,6 +109,10 @@ class Transaction extends AbstractModel
 	
 	public function hasGatewayURL(){
 		return !empty($this->gatewayURL);
+	}
+	
+	public function hasError(){
+		return !empty($this->error) && $this->getStatus()<0;
 	}
 	
 	/** 
@@ -187,5 +203,15 @@ class Transaction extends AbstractModel
     public function getInstructions()
     {
         return $this->instructions;
+	}
+	
+    /**
+     * Get the value of error
+     *
+     * @return Error
+     */
+    public function getError()
+    {
+        return $this->error;
 	}
 } 

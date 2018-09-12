@@ -168,23 +168,7 @@ class PayMeeCheckout
      */
     private function generateTransaction($toJSON)
     {
-        /* $request = new \stdClass();
-        $request->currency = $this->config["currency"];
-        $request->amount = $this->config["amount"];
-        $request->referenceCode = $this->config["referenceCode"];
-        $request->maxAge = $this->config["maxAge"];
-        $request->shopper = $this->config["shopper"];
-		
-        if (isset($this->config["callbackURL"])) {
-			$request->callbackUrl = $this->config["callbackURL"];
-        } */
-		
-		
-		// print_r($request);
-		// print_r($this->checkout);
-		// exit('request'.PHP_EOL);
-		
-		$curl = curl_init();
+        $curl = curl_init();
         curl_setopt_array($curl, [
             CURLOPT_URL            => $this->generateURL(),
             CURLOPT_RETURNTRANSFER => true,
@@ -210,10 +194,10 @@ class PayMeeCheckout
         if ($toJSON === true) {
             return json_encode($response, JSON_UNESCAPED_UNICODE);
         }else{
-			// print_r($response);
+			print_r($response);
+			exit('response');
 			$response = Transaction::fromJson($response);
 			// print_r($response);
-			// exit('response');
 		}
 
         return $response;
